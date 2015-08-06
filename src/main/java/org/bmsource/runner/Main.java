@@ -1,12 +1,17 @@
 package org.bmsource.runner;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.bmsource.beans.BookEJBRemote;
 import org.bmsource.beans.BookService;
 import org.bmsource.model.Book;
 import org.bmsource.model.Customer;
@@ -15,7 +20,27 @@ import org.jboss.weld.environment.se.WeldContainer;
 
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws NamingException
+    {
+        Context ctx = new InitialContext();
+        BookEJBRemote bookEJB = (BookEJBRemote) ctx.lookup("java:global/blog/BookEJB!org.bmsource.beans.BookEJBRemote");
+
+        // Gets and displays all the books from the database
+        List<Book> books = bookEJB.findBooks();
+        for (Book aBook : books)
+            System.out.println(aBook);
+
+        Book book = new Book("H2G2", "Scifi book", 12.5F, "1-24561-799-0");
+        book = bookEJB.createBook(book);
+        System.out.println("Book created : " + book);
+        book.setTitle("H2G2");
+        book = bookEJB.updateBook(book);
+        System.out.println("Book updated : " + book);
+        bookEJB.deleteBook(book);
+        System.out.println("Book deleted");
+    }
+
+    private static void embeddedTest()
     {
         Weld weld = new Weld();
         WeldContainer container = weld.initialize();
@@ -38,6 +63,5 @@ public class Main
         tx.commit();
 
         weld.shutdown();
-
     }
 }

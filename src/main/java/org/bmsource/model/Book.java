@@ -13,8 +13,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @NamedQueries({
-        @NamedQuery(name = "findAllBooks", query = "SELECT b FROM Book b"),
-        @NamedQuery(name = "findBookH2G2", query = "SELECT b FROM Book b WHERE b.title ='H2G2'")
+        @NamedQuery(name = "Book.findAllBooks", query = "SELECT b FROM Book b"),
+        @NamedQuery(name = "`Book.findBookH2G2", query = "SELECT b FROM Book b WHERE b.title ='H2G2'")
 })
 @Entity
 public class Book implements Serializable

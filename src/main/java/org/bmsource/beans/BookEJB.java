@@ -21,7 +21,7 @@ public class BookEJB implements BookEJBRemote
     @Override
     public List<Book> findBooks()
     {
-        TypedQuery<Book> query = em.createNamedQuery(Book.FIND_ALL, Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b", Book.class);
         return query.getResultList();
     }
 
