@@ -16,5 +16,7 @@ public interface BookEJBRemote
 
     public @NotNull Book updateBook(@NotNull Book book);
 
+    public Book findBookById(@NotNull Long id);
+
     public void deleteBook(@NotNull Book book);
 }

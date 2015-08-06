@@ -5,12 +5,14 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
 import org.bmsource.model.Book;
 
+@Named
 @Stateless
 @LocalBean
 public class BookEJB implements BookEJBRemote
@@ -28,7 +30,6 @@ public class BookEJB implements BookEJBRemote
     @Override
     public @NotNull Book createBook(@NotNull Book book)
     {
-        System.out.println("$$$$$ persisting book " + book);
         em.persist(book);
         return book;
     }
@@ -42,7 +43,12 @@ public class BookEJB implements BookEJBRemote
     @Override
     public void deleteBook(@NotNull Book book)
     {
-        System.out.println("$$$$$ deleting book " + book);
         em.remove(em.merge(book));
+    }
+
+    @Override
+    public Book findBookById(@NotNull Long id)
+    {
+        return em.find(Book.class, id);
     }
 }

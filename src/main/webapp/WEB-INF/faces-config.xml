@@ -8,20 +8,11 @@
 			<var>i18n</var>
 		</resource-bundle>
 	</application>
- 
 	<navigation-rule>
-		<from-view-id>/list.xhtml</from-view-id>
+		<from-view-id>/viewBooks.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>create</from-outcome>
-			<to-view-id>/create.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/create.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/list.xhtml</to-view-id>
-			<redirect/>
+			<to-view-id>/newBook.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
