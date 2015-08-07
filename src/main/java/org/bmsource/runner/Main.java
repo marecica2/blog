@@ -11,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.bmsource.beans.BookEJB;
 import org.bmsource.beans.BookEJBRemote;
 import org.bmsource.beans.BookService;
 import org.bmsource.model.Book;
@@ -20,7 +21,36 @@ import org.jboss.weld.environment.se.WeldContainer;
 
 public class Main
 {
-    public static void main(String[] args) throws NamingException
+    public static void main(String[] args)
+    {
+        try
+        {
+            System.err.println("sssss");
+            System.out.println("sssss");
+            jaxb();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private static void jaxb() throws NamingException
+    {
+        Context ctx = new InitialContext();
+        BookEJB bookEJB = (BookEJB) ctx.lookup("java:global/blog/BookEJB!org.bmsource.beans.BookEJB");
+        List<Book> books = bookEJB.findBooks();
+
+        //        JAXBContext context = JAXBContext.newInstance(Book.class);
+        //        Marshaller m = context.createMarshaller();
+        //        StringWriter writer = new StringWriter();
+        //        for (Book aBook : books)
+        //        {
+        //            m.marshal(aBook, writer);
+        //            System.err.println(writer);
+        //        }
+    }
+
+    private static void lookupJndi() throws NamingException
     {
         Context ctx = new InitialContext();
         BookEJBRemote bookEJB = (BookEJBRemote) ctx.lookup("java:global/blog/BookEJB!org.bmsource.beans.BookEJBRemote");

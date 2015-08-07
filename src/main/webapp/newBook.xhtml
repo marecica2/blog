@@ -12,7 +12,8 @@
 		<h:form id="bookForm">
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Title : " />
-				<h:inputText value="#{bookController.book.title}" />
+				<h:inputText id="bookTitle" value="#{bookController.book.title}" />
+				<h:message for="bookTitle" />
 				
 				<h:outputLabel value="Price : " />
 				<h:inputText value="#{bookController.book.price}" />
