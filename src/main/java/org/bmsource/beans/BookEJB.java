@@ -1,5 +1,6 @@
 package org.bmsource.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -15,7 +16,7 @@ import org.bmsource.model.Book;
 @Named
 @Stateless
 @LocalBean
-public class BookEJB implements BookEJBRemote
+public class BookEJB implements BookEJBRemote, Serializable
 {
     @Inject
     private EntityManager em;

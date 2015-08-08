@@ -11,12 +11,18 @@ import javax.persistence.NamedQuery;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @NamedQueries({
         @NamedQuery(name = "Book.findAllBooks", query = "SELECT b FROM Book b"),
         @NamedQuery(name = "`Book.findBookH2G2", query = "SELECT b FROM Book b WHERE b.title ='H2G2'")
 })
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Book implements Serializable
 {
     public static final String FIND_ALL = "Book.findAllBooks";
@@ -27,6 +33,7 @@ public class Book implements Serializable
 
     @NotNull
     @Column(nullable = false)
+    @XmlAttribute(required = true)
     private String title;
 
     @NotNull

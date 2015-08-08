@@ -1,8 +1,5 @@
 package org.bmsource.beans;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,36 +7,43 @@ import java.util.Map;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 
+import junit.framework.TestCase;
+
 import org.bmsource.model.Book;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BookEJBTest
+public class BookEJBTest extends TestCase
 {
-    private static Context ctx;
-    private static EJBContainer ejbContainer;
+    private Context ctx;
+    private EJBContainer ejbContainer;
 
+    @Override
     @BeforeClass
-    public static void setUp()
+    public void setUp()
     {
+
         System.out.println("Opening the container");
-        System.out.println(new File("target/classes").getAbsolutePath());
+
         Map<String, Object> properties = new HashMap<>();
-        properties.put(EJBContainer.MODULES, new File("target/classes"));
+        properties.put(EJBContainer.APP_NAME, "blog");
+        properties.put(EJBContainer.MODULES, new File("f://workspace/target/blog-1.0-SNAPSHOT.war"));
+        properties.put(EJBContainer.PROVIDER, "org.glassfish.ejb.embedded.EJBContainerProviderImpl");
         ejbContainer = EJBContainer.createEJBContainer(properties);
         ctx = ejbContainer.getContext();
     }
 
+    @Override
     @AfterClass
-    public static void tearDown()
+    public void tearDown()
     {
         ejbContainer.close();
         System.out.println("Closing the container");
     }
 
     @Test
-    public void shouldCreateABook() throws Exception
+    public void testShouldCreateABook() throws Exception
     {
         // Looks up the EJB
         BookEJB bookEJB = (BookEJB) ctx.lookup("java:global/blog/BookEJB!org.bmsource.beans.BookEJB");
