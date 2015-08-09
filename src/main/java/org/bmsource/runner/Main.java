@@ -17,9 +17,11 @@ import javax.naming.NamingException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.ws.WebServiceRef;
 
 import org.bmsource.beans.BookEJBRemote;
 import org.bmsource.model.Book;
+import org.bmsource.ws.client.CardValidatorService;
 
 public class Main
 {
@@ -27,12 +29,24 @@ public class Main
     {
         try
         {
-            System.out.println("Executing Class " + Main.class.getName());
-            jaxb();
+            ws();
         } catch (Exception e)
         {
             e.printStackTrace();
         }
+    }
+
+    @WebServiceRef
+    private static CardValidatorService cardValidatorService;
+
+    private static void ws() throws Exception
+    {
+        org.bmsource.ws.client.CreditCard creditCard = new org.bmsource.ws.client.CreditCard();
+        creditCard.setNumber("12341234");
+        creditCard.setExpiryDate("10/12");
+        creditCard.setType("VISA");
+        creditCard.setControlNumber(1234);
+        System.out.println(cardValidatorService.getCardValidatorPort().validate(creditCard));
     }
 
     private static void jms() throws Exception
