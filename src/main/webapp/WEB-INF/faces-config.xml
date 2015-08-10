@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
-	<application>
-		<resource-bundle>
-			<base-name>messages</base-name>
-			<var>i18n</var>
-		</resource-bundle>
-	</application>
-	<navigation-rule>
-		<from-view-id>/viewBooks.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>create</from-outcome>
-			<to-view-id>/newBook.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
+  xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+  <application>
+    <locale-config>
+      <default-locale>en</default-locale>
+      <supported-locale>sk</supported-locale>
+    </locale-config>
+    <resource-bundle>
+      <base-name>messages</base-name>
+      <var>i18n</var>
+    </resource-bundle>
+  </application>
+  <navigation-rule>
+    <from-view-id>/viewBooks.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>create</from-outcome>
+      <to-view-id>/newBook.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <!-- 
+  <render-kit>
+      <renderer>
+          <component-family>javax.faces.Messages</component-family>
+          <renderer-type>javax.faces.Messages</renderer-type>
+          <renderer-class>org.bmsource.jsf.EscapableMessagesRenderer</renderer-class>
+      </renderer>
+  </render-kit>  
+   -->
 </faces-config>

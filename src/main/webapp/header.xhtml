@@ -1,0 +1,226 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+<div class="header-top">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-2  col-sm-4">
+
+				<!-- header-top-first start -->
+				<!-- ================ -->
+				<div class="header-top-first clearfix">
+					<ul class="social-links clearfix hidden-xs">
+						<li class="vimeo"><a href="/"><i class="fa fa-home"></i></a></li>
+						<li class="facebook"><a target="_blank" href="http://www.facebook.com/widgr"><i class="fa fa-facebook"></i></a></li>
+						<li class="googleplus"><a target="_blank" href="https://plus.google.com/+WidGrApp"><i class="fa fa-google-plus"></i></a></li>
+						<li class="twitter"><a target="_blank" href="http://twitter.com/widgrApp"><i class="fa fa-twitter"></i></a></li>
+						<li class="youtube"><a target="_blank" href="https://www.youtube.com/channel/UCWM6yey03-S3OYVEo3PC3Mg"><i class="fa fa-youtube"></i></a></li>
+						<li class="vimeo"><a target="_blank" href="https://vimeo.com/channels/widgr"><i class="icon-vimeo"></i></a></li>
+					</ul>
+					<div class="social-links hidden-lg hidden-md hidden-sm">
+						<div class="btn-group dropdown">
+							<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-share-alt"></i></button>
+							<ul class="dropdown-menu dropdown-animation">
+								<li class="vimeo"><a href="/"><i class="fa fa-home"></i></a></li>
+								<li class="facebook"><a target="_blank" href="http://www.facebook.com/widgr"><i class="fa fa-facebook"></i></a></li>
+								<li class="googleplus"><a target="_blank" href="http://plus.google.com/+WidGrApp"><i class="fa fa-google-plus"></i></a></li>
+								<li class="twitter"><a target="_blank" href="http://www.twitter.com/widgrApp"><i class="fa fa-twitter"></i></a></li>
+								<li class="youtube"><a target="_blank" href="https://www.youtube.com/channel/UCWM6yey03-S3OYVEo3PC3Mg"><i class="fa fa-youtube"></i></a></li>
+								<li class="vimeo"><a target="_blank" href="https://vimeo.com/channels/widgr"><i class="icon-vimeo"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- header-top-first end -->
+
+			</div>
+			<div class="col-xs-10 col-sm-8">
+
+				<!-- header-top-second start -->
+				<!-- ================ -->
+				<div id="header-top-second" class="clearfix">
+
+					<!-- header top dropdowns start -->
+					<!-- ================ -->
+					
+					
+					<div class="header-top-dropdown">
+						<div class="btn-group dropdownq">
+							<a class="btn dropdown-toggle margin-top-clear" href="/instant" target="_blank" rel="tooltip" data-placement="bottom" data-original-title="start-instant-chat"><i class="fa fa-comments-o"></i></a>
+							<a class="btn dropdown-toggle margin-top-clear" href="/about">#{i18n['about']}</a>
+							<a class="btn dropdown-toggle margin-top-clear" href="/help">#{i18n['tour']}</a>
+							<a class="btn dropdown-toggle margin-top-clear" href="/faq">#{i18n['faq']}</a>
+							<a class="btn dropdown-toggle margin-top-clear" href="/contact">#{i18n['contact-us']}</a>
+						</div>
+						<div class="btn-group dropdown">
+							<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+								<img src='resources/images/flags/en.gif'></img>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-right dropdown-animation" style="padding:0px;">
+					            <li><a href="/locale?locale=en-url=request.url.urlEncode" ><img class="inline" src='resources/images/flags/en.gif'></img> English</a></li>
+					            <li><a href="/locale?locale=de-url=request.url.urlEncode" ><img class="inline" src='resources/images/flags/de.gif'></img> Deutsch</a></li>
+					            <li><a href="/locale?locale=sk-url=request.url.urlEncode" ><img class="inline" src='resources/images/flags/sk.gif'></img> Slovensky</a></li>
+							</ul>							
+						</div>
+						
+					</div>
+					<!--  header top dropdowns end -->
+
+				</div>
+				<!-- header-top-second end -->
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<header class="header fixed clearfix">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2">
+
+				<!-- header-left start -->
+				<!-- ================ -->
+				<div class="header-left clearfix">
+
+					<!-- logo -->
+					<div class="logo-header centered">
+						<div class="logo">
+							<a href="/home"><img id="logo" src="resources/images/logo_purple.png" style="height:40px;margin-top:10px" alt="widgr"></img></a>
+						</div>
+	
+						<!-- name-and-slogan -->
+						<div class="site-slogan centered">
+							#{i18n['share-your-knowledge']}
+						</div>
+					</div>
+
+				</div>
+				<!-- header-left end -->
+
+			</div>
+			<div class="col-md-10">
+			
+				<!-- header-right start -->
+				<!-- ================ -->
+				<div class="header-right clearfix">
+
+					<!-- main-navigation start -->
+					<!-- ================ -->
+					<div class="main-navigation animated">
+
+						<!-- navbar start -->
+						<!-- ================ -->
+						<nav class="navbar navbar-default" role="navigation">
+							<div class="container-fluid">
+
+								<!-- Toggle get grouped for better mobile display -->
+								<div class="navbar-header" style="padding:15px;">
+									<button type="button" class="navbar-toggle btn  btn-block margin-clear" data-toggle="collapse" data-target="#navbar-collapse-1">
+										<span class="sr-only">#{i18n['toggle-navigation']}</span>
+										<span class="fa fa-chevron-down fa-1x "></span>
+									</button>
+								</div>
+
+								<!-- Collect the nav links, forms, and other content for toggling -->
+								<div class="collapse navbar-collapse" id="navbar-collapse-1">
+									<ul class="nav navbar-nav navbar-right">
+							  	  		<li><a href="/"><span class="xxx">#{i18n.home}</span></a></li>
+										<li class="header-notification hidden" style="padding-left:30px">
+							  	  			<a href="/mail" class="object-non-visible animated object-visible wobble" data-animation-effect="wobble" data-effect-delay="6000" ><i style="font-size:1.3em" class="text-default fa fa-envelope" title="received-new-message"></i></a>
+							  	  		</li>	
+							  	  		<li class="header-notification2"><a href="/mail" style="padding-right:0px"><i class="fa fa-envelope-o"></i></a></li>
+  								  	   		<li><a href="/search" id="public-btn-logout"><i class="fa fa-search"></i> #{i18n.search}</a></li>
+							          	<li><a href="/chat"><i class="fa fa-comments-o"></i> #{i18n['live-chat']}</a></li>
+
+									      <li class="dropdown">
+									        <a href="/dashboard" class="dropdown-toggle" data-toggle="dropdown">
+									        	<i class="fa fa-th-large"></i> #{i18n['dashboard']}
+									        </a>
+									        <ul class="dropdown-menu">
+									          	<li><a href="/dashboard"><i class="fa fa-th-large"></i> #{i18n['dashboard']}</a></li>
+									          	<li><a href="/listings"><i class="fa fa-share-alt"></i> #{i18n['manage-channels']}</a></li>
+									          	<li><a href="/media-library"><i class="icon-docs"></i> #{i18n['media-library']}</a></li>
+									        </ul>
+									      </li>	
+
+									      <li class='dropdown'>
+									        <a href="/user/user.login/calendar" class="dropdown-toggle" data-toggle="dropdown">
+									        	<i class="fa fa-calendar"></i> #{i18n['your-sessions']}
+									        </a>
+									        <ul class="dropdown-menu">
+											    <li><a href="/user/user.login/calendar"><i class="fa fa-calendar"></i> #{i18n['your-sessions']}</a></li>
+									          	<li><a href="/upcoming"><i class="icon-clock"></i> #{i18n['upcoming-events']}</a></li>
+									          	<li><a href="/past"><i class="icon-back-in-time"></i> #{i18n['previous-events']}</a></li>
+										        <li><a href="/approvements"><i class="fa fa-check"></i> #{i18n['session-approval']}</a></li>
+									        </ul>
+									      </li>	
+									      									 	
+										
+									   	
+									   	<li class='dropdown'>
+									    	<a class="dropdown-toggle" data-toggle="dropdown" href="/about" >#{i18n['about-widgr']}</a>
+									        <ul class="dropdown-menu">
+									      		<li><a href="/about">#{i18n['about-widgr']}</a></li>
+									      		<li><a href="/about#features">#{i18n['features']}</a></li>
+									      		<li><a href="/about#pricing">#{i18n['pricing']}</a></li>
+									      		<li><a href="/about#contact">#{i18n['contact-us']}</a></li>
+									        </ul>
+									    </li>   
+									    
+									      <li> 
+									      	<a href="/login?url=request.url.urlEncode" id="public-btn-logout" title="'sign-in'">
+									      		<i class="black fa fa-power-off fa-1x"> </i> #{i18n['sign-in']}
+									      	</a>
+									      </li>
+									      <!-- 
+									      <li> 
+									      	<iframe style="overflow:hidden;width:100px;height:40px;display: inline-block;margin:6px 0;" src="/registration/facebook" scrolling="no" seamless="seamless" frameBorder="0"></iframe>
+									      </li>  
+									       -->  
+										
+									      <li class="dropdown">
+									        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									        	<i style="color:#5cb85c" class="fa fa-circle"></i>
+									        	<img class="img-circle inline" style="position:relative;bottom:2px;height:24px;" src="/user.avatarUrl_64x64"></img>
+									        </a>
+									        <ul class="dropdown-menu">
+												<li><a href="/available-stop?url="><i style="color:#5cb85c" class="fa fa-circle"></i> #{i18n['uncheck-me-as-available']}</a></li>
+									          	<li><a href="/user/"><i class="icon-user"></i> #{i18n['profile']}</a></li>
+									          	<li><a href="/contacts"><i class="icon-users"></i> #{i18n['contacts']}</a></li>
+									          	<li><a href="/payments"><i class="fa fa-bar-chart-o"></i> #{i18n['received-payments']}</a></li>
+									          	<li><a href="/payments?sent=true"><i class="fa fa-bar-chart-o"></i> #{i18n['sent-payments']}</a></li>
+									          	<li><a href="/settings"><i class="fa fa-edit"></i> #{i18n['settings']}</a></li>
+						  						<li class="divider"></li>
+									          	<li><a href="/admin/users"><i class="fa fa-cog"></i> Users</a></li>
+									          	<li><a href="/admin/publishers"><i class="fa fa-cog"></i> Publisher Requests</a></li>
+						  						<li class="divider"></li>
+									      	  	<li> 
+										      		<a href="/logout?url=" id="public-btn-logout" title="'sign-out'">
+										      			<i class="black fa fa-power-off fa-1x"></i> #{i18n['sign-out']}
+										      		</a>
+									      		</li>          
+									        </ul>
+									      </li>	
+									</ul>
+								</div>
+
+							</div>
+						</nav>
+						<!-- navbar end -->
+
+					</div>
+					<!-- main-navigation end -->
+
+				</div>
+				<!-- header-right end -->
+
+			</div>
+		</div>
+	</div>
+</header>
+
+</ui:composition>
