@@ -16,6 +16,9 @@ public class RegistrationController
     @Inject
     private UserEJB userEJB;
 
+    @Inject
+    private LoginController login;
+
     private final User user = new User();
 
     public String register()

@@ -13,10 +13,13 @@
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
+			<h2>#{i18n['registration']}</h2>
 			<h:form id="registrationForm">
 				<div class="form-group">
 					<label class="" for="login">#{i18n['login']} *</label>
-					<h:inputText class="form-control" id="login" value="#{registrationController.user.login}" a:placeholder="#{i18n['login']}" />
+					<h:inputText class="form-control" id="login" value="#{registrationController.user.login}" a:placeholder="#{i18n['login']}">
+						<f:validateLength minimum="10"/>
+					</h:inputText>
 					<h:message for="login" errorClass="error"/>
 				</div>				
 				<div class="form-group">
@@ -28,6 +31,11 @@
 					<label class="" for="login">#{i18n['last-name']} *</label>
 					<h:inputText class="form-control" id="lastName" value="#{registrationController.user.lastName}" a:placeholder="#{i18n['last-name']}"/>
 					<h:message for="lastName" errorClass="error"/>
+				</div>
+				<div class="form-group">
+					<label class="" for="password">#{i18n['password']} *</label>
+					<h:inputSecret class="form-control" id="password" value="#{registrationController.user.password}" a:placeholder="#{i18n['password']}"/>
+					<h:message for="password" errorClass="error"/>
 				</div>
 				<div class="form-group">
 					<p class="left">

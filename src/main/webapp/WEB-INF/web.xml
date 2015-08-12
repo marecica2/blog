@@ -5,7 +5,7 @@
                         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
                         version="3.0">
   <welcome-file-list>
-    <welcome-file>newBook.xhtml</welcome-file>
+    <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
   <context-param>
     <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
@@ -23,7 +23,6 @@
     <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
     <param-value>true</param-value>
   </context-param>
-  
   <servlet>
       <servlet-name>javax.ws.rs.core.Application</servlet-name>
       <load-on-startup>1</load-on-startup>

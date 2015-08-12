@@ -49,11 +49,11 @@
 					
 					<div class="header-top-dropdown">
 						<div class="btn-group dropdownq">
-							<a class="btn dropdown-toggle margin-top-clear" href="/instant" target="_blank" rel="tooltip" data-placement="bottom" data-original-title="start-instant-chat"><i class="fa fa-comments-o"></i></a>
-							<a class="btn dropdown-toggle margin-top-clear" href="/about">#{i18n['about']}</a>
-							<a class="btn dropdown-toggle margin-top-clear" href="/help">#{i18n['tour']}</a>
-							<a class="btn dropdown-toggle margin-top-clear" href="/faq">#{i18n['faq']}</a>
-							<a class="btn dropdown-toggle margin-top-clear" href="/contact">#{i18n['contact-us']}</a>
+							<a class="btn dropdown-toggle margin-top-clear" href="/instant.xhtml" target="_blank" rel="tooltip" data-placement="bottom" data-original-title="start-instant-chat"><i class="fa fa-comments-o"></i></a>
+							<a class="btn dropdown-toggle margin-top-clear" href="/about.xhtml">#{i18n['about']}</a>
+							<a class="btn dropdown-toggle margin-top-clear" href="/help.xhtml">#{i18n['tour']}</a>
+							<a class="btn dropdown-toggle margin-top-clear" href="/faq.xhtml">#{i18n['faq']}</a>
+							<a class="btn dropdown-toggle margin-top-clear" href="/contact.xhtml">#{i18n['contact-us']}</a>
 						</div>
 						<div class="btn-group dropdown">
 							<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
@@ -130,32 +130,32 @@
 									<ul class="nav navbar-nav navbar-right">
 							  	  		<li><a href="/"><span class="xxx">#{i18n.home}</span></a></li>
 										<li class="header-notification hidden" style="padding-left:30px">
-							  	  			<a href="/mail" class="object-non-visible animated object-visible wobble" data-animation-effect="wobble" data-effect-delay="6000" ><i style="font-size:1.3em" class="text-default fa fa-envelope" title="received-new-message"></i></a>
+							  	  			<a href="mail.xhtml" class="object-non-visible animated object-visible wobble" data-animation-effect="wobble" data-effect-delay="6000" ><i style="font-size:1.3em" class="text-default fa fa-envelope" title="received-new-message"></i></a>
 							  	  		</li>	
-							  	  		<li class="header-notification2"><a href="/mail" style="padding-right:0px"><i class="fa fa-envelope-o"></i></a></li>
-  								  	   		<li><a href="/search" id="public-btn-logout"><i class="fa fa-search"></i> #{i18n.search}</a></li>
-							          	<li><a href="/chat"><i class="fa fa-comments-o"></i> #{i18n['live-chat']}</a></li>
+							  	  		<li class="header-notification2"><a href="mail.xhtml" style="padding-right:0px"><i class="fa fa-envelope-o"></i></a></li>
+  								  	   	<li><a href="search.xhtml" id="public-btn-logout"><i class="fa fa-search"></i> #{i18n.search}</a></li>
+							          	<li><a href="chat.xhtml"><i class="fa fa-comments-o"></i> #{i18n['live-chat']}</a></li>
 
 									      <li class="dropdown">
-									        <a href="/dashboard" class="dropdown-toggle" data-toggle="dropdown">
+									        <a href="dashboard.xhtml" class="dropdown-toggle" data-toggle="dropdown">
 									        	<i class="fa fa-th-large"></i> #{i18n['dashboard']}
 									        </a>
 									        <ul class="dropdown-menu">
-									          	<li><a href="/dashboard"><i class="fa fa-th-large"></i> #{i18n['dashboard']}</a></li>
-									          	<li><a href="/listings"><i class="fa fa-share-alt"></i> #{i18n['manage-channels']}</a></li>
-									          	<li><a href="/media-library"><i class="icon-docs"></i> #{i18n['media-library']}</a></li>
+									          	<li><a href="dashboard.xhtml"><i class="fa fa-th-large"></i> #{i18n['dashboard']}</a></li>
+									          	<li><a href="listings.xhtml"><i class="fa fa-share-alt"></i> #{i18n['manage-channels']}</a></li>
+									          	<li><a href="media-library.xhtml"><i class="icon-docs"></i> #{i18n['media-library']}</a></li>
 									        </ul>
 									      </li>	
 
 									      <li class='dropdown'>
-									        <a href="/user/user.login/calendar" class="dropdown-toggle" data-toggle="dropdown">
+									        <a href="calendar.xhtml" class="dropdown-toggle" data-toggle="dropdown">
 									        	<i class="fa fa-calendar"></i> #{i18n['your-sessions']}
 									        </a>
 									        <ul class="dropdown-menu">
-											    <li><a href="/user/user.login/calendar"><i class="fa fa-calendar"></i> #{i18n['your-sessions']}</a></li>
-									          	<li><a href="/upcoming"><i class="icon-clock"></i> #{i18n['upcoming-events']}</a></li>
-									          	<li><a href="/past"><i class="icon-back-in-time"></i> #{i18n['previous-events']}</a></li>
-										        <li><a href="/approvements"><i class="fa fa-check"></i> #{i18n['session-approval']}</a></li>
+											    <li><a href="calendar.xhtml"><i class="fa fa-calendar"></i> #{i18n['your-sessions']}</a></li>
+									          	<li><a href="upcoming.xhtml"><i class="icon-clock"></i> #{i18n['upcoming-events']}</a></li>
+									          	<li><a href="past.xhtml"><i class="icon-back-in-time"></i> #{i18n['previous-events']}</a></li>
+										        <li><a href="approvements.xhtml"><i class="fa fa-check"></i> #{i18n['session-approval']}</a></li>
 									        </ul>
 									      </li>	
 									      									 	
@@ -164,23 +164,19 @@
 									   	<li class='dropdown'>
 									    	<a class="dropdown-toggle" data-toggle="dropdown" href="/about" >#{i18n['about-widgr']}</a>
 									        <ul class="dropdown-menu">
-									      		<li><a href="/about">#{i18n['about-widgr']}</a></li>
-									      		<li><a href="/about#features">#{i18n['features']}</a></li>
-									      		<li><a href="/about#pricing">#{i18n['pricing']}</a></li>
-									      		<li><a href="/about#contact">#{i18n['contact-us']}</a></li>
+									      		<li><a href="about.xhtml">#{i18n['about-widgr']}</a></li>
+									      		<li><a href="about.xhtml#features">#{i18n['features']}</a></li>
+									      		<li><a href="about.xhtml#pricing">#{i18n['pricing']}</a></li>
+									      		<li><a href="about.xhtml#contact">#{i18n['contact-us']}</a></li>
 									        </ul>
 									    </li>   
 									    
 									      <li> 
-									      	<a href="/login?url=request.url.urlEncode" id="public-btn-logout" title="'sign-in'">
+									      	status: #{loggedUser.isLogged()}
+									      	<a href="login.xhtml" id="public-btn-logout" title="'sign-in'">
 									      		<i class="black fa fa-power-off fa-1x"> </i> #{i18n['sign-in']}
 									      	</a>
 									      </li>
-									      <!-- 
-									      <li> 
-									      	<iframe style="overflow:hidden;width:100px;height:40px;display: inline-block;margin:6px 0;" src="/registration/facebook" scrolling="no" seamless="seamless" frameBorder="0"></iframe>
-									      </li>  
-									       -->  
 										
 									      <li class="dropdown">
 									        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -188,18 +184,18 @@
 									        	<img class="img-circle inline" style="position:relative;bottom:2px;height:24px;" src="/user.avatarUrl_64x64"></img>
 									        </a>
 									        <ul class="dropdown-menu">
-												<li><a href="/available-stop?url="><i style="color:#5cb85c" class="fa fa-circle"></i> #{i18n['uncheck-me-as-available']}</a></li>
-									          	<li><a href="/user/"><i class="icon-user"></i> #{i18n['profile']}</a></li>
-									          	<li><a href="/contacts"><i class="icon-users"></i> #{i18n['contacts']}</a></li>
-									          	<li><a href="/payments"><i class="fa fa-bar-chart-o"></i> #{i18n['received-payments']}</a></li>
-									          	<li><a href="/payments?sent=true"><i class="fa fa-bar-chart-o"></i> #{i18n['sent-payments']}</a></li>
-									          	<li><a href="/settings"><i class="fa fa-edit"></i> #{i18n['settings']}</a></li>
+												<li><a href="available-stop?url="><i style="color:#5cb85c" class="fa fa-circle"></i> #{i18n['uncheck-me-as-available']}</a></li>
+									          	<li><a href="user.xhtml"><i class="icon-user"></i> #{i18n['profile']}</a></li>
+									          	<li><a href="contacts.xhtml"><i class="icon-users"></i> #{i18n['contacts']}</a></li>
+									          	<li><a href="payments.xhtml"><i class="fa fa-bar-chart-o"></i> #{i18n['received-payments']}</a></li>
+									          	<li><a href="payments.xhtml?sent=true"><i class="fa fa-bar-chart-o"></i> #{i18n['sent-payments']}</a></li>
+									          	<li><a href="settings.xhtml"><i class="fa fa-edit"></i> #{i18n['settings']}</a></li>
 						  						<li class="divider"></li>
-									          	<li><a href="/admin/users"><i class="fa fa-cog"></i> Users</a></li>
-									          	<li><a href="/admin/publishers"><i class="fa fa-cog"></i> Publisher Requests</a></li>
+									          	<li><a href="users.xhtml"><i class="fa fa-cog"></i> Users</a></li>
+									          	<li><a href="publishers.xhtml"><i class="fa fa-cog"></i> Publisher Requests</a></li>
 						  						<li class="divider"></li>
 									      	  	<li> 
-										      		<a href="/logout?url=" id="public-btn-logout" title="'sign-out'">
+										      		<a href="logout.xhtml" id="public-btn-logout" title="'sign-out'">
 										      			<i class="black fa fa-power-off fa-1x"></i> #{i18n['sign-out']}
 										      		</a>
 									      		</li>          

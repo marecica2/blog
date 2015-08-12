@@ -47,4 +47,9 @@ public class UserEJB implements Serializable
     {
         return em.find(User.class, id);
     }
+
+    public User findUserByLogin(String login)
+    {
+        return em.createQuery("from User u where u.login = :login", User.class).setParameter("login", login).getSingleResult();
+    }
 }
