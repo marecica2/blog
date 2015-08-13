@@ -1,22 +1,42 @@
 package org.bmsource.controllers;
 
-import java.io.IOException;
-
-import javax.faces.context.ExternalContext;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 
 public class BaseController
 {
-    public void redirect(String page)
+    public String redirect(String page)
     {
-        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-        try
-        {
-            context.redirect(context.getRequestContextPath() + page);
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        return page + "?faces-redirect=true";
+        //        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        //        try
+        //        {
+        //            context.redirect(context.getRequestContextPath() + page);
+        //        } catch (IOException e)
+        //        {
+        //            e.printStackTrace();
+        //        }
 
+    }
+
+    public String refresh()
+    {
+        UIViewRoot view = FacesContext.getCurrentInstance().getViewRoot();
+        return view.getViewId() + "?faces-redirect=true";
+    }
+
+    public void flashMessage(String id, String message)
+    {
+        errorMessage(id, message);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
+    }
+
+    public void errorMessage(String id, String message)
+    {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(id, msg);
     }
 }

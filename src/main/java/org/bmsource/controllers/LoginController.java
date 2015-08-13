@@ -1,68 +1,70 @@
 package org.bmsource.controllers;
 
-import java.io.Serializable;
-
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bmsource.beans.UserEJB;
 import org.bmsource.model.User;
 
-@Named("loggedUser")
-@SessionScoped
-public class LoginController extends BaseController implements Serializable {
+@Named
+@RequestScoped
+public class LoginController extends BaseController
+{
+    @Inject
+    private UserEJB userEJB;
 
-	@Inject
-	private UserEJB userEJB;
+    @Inject
+    private UserController userController;
 
-	private String login;
-	private String password;
+    private String login;
 
-	private User user;
+    private String password;
 
-	public Boolean isLogged() {
-		if (user != null)
-			return true;
-		return false;
-	}
+    public String login()
+    {
+        User user = userEJB.findUserByLogin(login);
+        if (user == null)
+        {
+            System.err.println("User does not exist");
+            errorMessage("loginForm:login", "User does not exist");
+        }
+        if (user != null && !user.getPassword().equals(password))
+        {
+            System.err.println("Incorrect password");
+            errorMessage("loginForm:password", "Incorrect password");
+        }
+        if (user != null && user.getPassword().equals(password))
+        {
+            userController.setUser(user);
+            return redirect("/index.xhtml");
+        }
+        return "login.xhtml";
+    }
 
-	public String login() {
-		User user = userEJB.findUserByLogin(login);
-		if (user == null) {
-			System.err.println("User does not exist");
-		}
-		if (!user.getPassword().equals(password)) {
-			System.err.println("Incorrect password");
-		}
-		if (user != null && user.getPassword().equals(password)) {
-			this.user = user;
-			redirect("/index.xhtml");
-		}
-		return "login.xhtml";
-	}
+    public String logout()
+    {
+        userController.setUser(null);
+        return redirect("/index.xhtml");
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public String getLogin()
+    {
+        return login;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setLogin(String login)
+    {
+        this.login = login;
+    }
 
-	public String getLogin() {
-		return login;
-	}
+    public String getPassword()
+    {
+        return password;
+    }
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
 }

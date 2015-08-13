@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
@@ -50,6 +51,12 @@ public class UserEJB implements Serializable
 
     public User findUserByLogin(String login)
     {
-        return em.createQuery("from User u where u.login = :login", User.class).setParameter("login", login).getSingleResult();
+        try
+        {
+            return em.createQuery("from User u where u.login = :login", User.class).setParameter("login", login).getSingleResult();
+        } catch (NoResultException ex)
+        {
+            return null;
+        }
     }
 }

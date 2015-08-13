@@ -14,17 +14,16 @@
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 			<h2>#{i18n['login']}</h2>
-			<h:form id="registrationForm">
+			<h:form id="loginForm">
 				<div class="form-group">
 					<label class="" for="login">#{i18n['login']} *</label>
-					<h:inputText class="form-control" id="login" value="#{loggedUser.login}" a:placeholder="#{i18n['login']}">
-						<f:validateLength minimum="10"/>
-					</h:inputText>
+					<h:inputText class="form-control" id="login" value="#{loginController.login}" a:placeholder="#{i18n['login']}" />
 					<h:message for="login" errorClass="error"/>
-				</div>				
+				</div>		
+						
 				<div class="form-group">
-					<label class="" for="password">#{i18n['first-name']} *</label>
-					<h:inputText class="form-control" id="password" value="#{loggedUser.password}" a:placeholder="#{i18n['password']}"/>
+					<label class="" for="password">#{i18n['password']} *</label>
+					<h:inputText class="form-control" id="password" value="#{loginController.password}" a:placeholder="#{i18n['password']}"/>
 					<h:message for="password" errorClass="error"/>
 				</div>
 				
@@ -33,7 +32,7 @@
 					#{i18n['or']} <a href="password-reset.xhtml">#{i18n['reset-your-password']}</a>
 				</div>				
 				
-				<h:commandButton class="btn btn-default pull-left" value="#{i18n['submit']}" action="#{loggedUser.login}">
+				<h:commandButton class="btn btn-default pull-left" value="#{i18n['submit']}" action="#{loginController.login}">
 				</h:commandButton>
 			</h:form>		
 		</div>	

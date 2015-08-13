@@ -14,7 +14,7 @@
 				<!-- ================ -->
 				<div class="header-top-first clearfix">
 					<ul class="social-links clearfix hidden-xs">
-						<li class="vimeo"><a href="/"><i class="fa fa-home"></i></a></li>
+						<li class="vimeo"><h:outputLink value=""><i class="fa fa-home"></i></h:outputLink></li>
 						<li class="facebook"><a target="_blank" href="http://www.facebook.com/widgr"><i class="fa fa-facebook"></i></a></li>
 						<li class="googleplus"><a target="_blank" href="https://plus.google.com/+WidGrApp"><i class="fa fa-google-plus"></i></a></li>
 						<li class="twitter"><a target="_blank" href="http://twitter.com/widgrApp"><i class="fa fa-twitter"></i></a></li>
@@ -129,14 +129,14 @@
 								<!-- Collect the nav links, forms, and other content for toggling -->
 								<div class="collapse navbar-collapse" id="navbar-collapse-1">
 									<ul class="nav navbar-nav navbar-right">
-							  	  		<li><a href="/"><span class="xxx">#{i18n.home}</span></a></li>
-										<li class="header-notification hidden" style="padding-left:30px">
-							  	  			<a href="mail.xhtml" class="object-non-visible animated object-visible wobble" data-animation-effect="wobble" data-effect-delay="6000" ><i style="font-size:1.3em" class="text-default fa fa-envelope" title="received-new-message"></i></a>
-							  	  		</li>	
+										<c:if test="#{!loggedUser.isLogged()}">
+							  	  			<li><a href="/"><span class="xxx">#{i18n.home}</span></a></li>
+							  	  		</c:if>
 							  	  		<li class="header-notification2"><a href="mail.xhtml" style="padding-right:0px"><i class="fa fa-envelope-o"></i></a></li>
   								  	   	<li><a href="search.xhtml" id="public-btn-logout"><i class="fa fa-search"></i> #{i18n.search}</a></li>
-							          	<li><a href="chat.xhtml"><i class="fa fa-comments-o"></i> #{i18n['live-chat']}</a></li>
-
+										<c:if test="#{loggedUser.isLogged()}">
+							          		<li><a href="chat.xhtml"><i class="fa fa-comments-o"></i> #{i18n['live-chat']}</a></li>
+										</c:if>
 										<c:if test="#{loggedUser.isLogged()}">
 									      <li class="dropdown">
 									        <a href="dashboard.xhtml" class="dropdown-toggle" data-toggle="dropdown">
@@ -149,7 +149,6 @@
 									        </ul>
 									      </li>	
 									    </c:if>
-
 										<c:if test="#{loggedUser.isLogged()}">
 									      <li class='dropdown'>
 									        <a href="calendar.xhtml" class="dropdown-toggle" data-toggle="dropdown">
@@ -163,8 +162,6 @@
 									        </ul>
 									      </li>	
 									    </c:if>
-									      									 	
-										
 									   	<c:if test="#{!loggedUser.isLogged()}">
 									   	<li class='dropdown'>
 									    	<a class="dropdown-toggle" data-toggle="dropdown" href="/about" >#{i18n['about-widgr']}</a>
@@ -176,7 +173,6 @@
 									        </ul>
 									    </li>   
 									    </c:if>
-									    
 									    <c:if test="#{!loggedUser.isLogged()}">
 									      <li> 
 									      	<a href="login.xhtml" id="public-btn-logout" title="'sign-in'">
@@ -184,31 +180,34 @@
 									      	</a>
 									      </li>
 										</c:if>
-
 										<c:if test="#{loggedUser.isLogged()}">
+										  
 									      <li class="dropdown">
 									        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									        	<i style="color:#5cb85c" class="fa fa-circle"></i>
 									        	<img class="img-circle inline" style="position:relative;bottom:2px;height:24px;" src="/user.avatarUrl_64x64"></img>
 									        </a>
 									        <ul class="dropdown-menu">
-												<li><a href="available-stop?url="><i style="color:#5cb85c" class="fa fa-circle"></i> #{i18n['uncheck-me-as-available']}</a></li>
-									          	<li><a href="user.xhtml"><i class="icon-user"></i> #{i18n['profile']}</a></li>
-									          	<li><a href="contacts.xhtml"><i class="icon-users"></i> #{i18n['contacts']}</a></li>
-									          	<li><a href="payments.xhtml"><i class="fa fa-bar-chart-o"></i> #{i18n['received-payments']}</a></li>
-									          	<li><a href="payments.xhtml?sent=true"><i class="fa fa-bar-chart-o"></i> #{i18n['sent-payments']}</a></li>
-									          	<li><a href="settings.xhtml"><i class="fa fa-edit"></i> #{i18n['settings']}</a></li>
+												<li><h:outputLink value="xxx.xhtml"><i style="color:#5cb85c" class="fa fa-circle"></i> #{i18n['uncheck-me-as-available']}</h:outputLink></li>
+									          	<li><h:outputLink value="user.xhtml"><i class="icon-user"></i> #{i18n['profile']}</h:outputLink></li>
+									          	<li><h:outputLink value="contacts.xhtml"><i class="icon-users"></i> #{i18n['contacts']}</h:outputLink></li>
+									          	<li><h:outputLink value="payments.xhtml"><i class="fa fa-bar-chart-o"></i> #{i18n['received-payments']}</h:outputLink></li>
+									          	<li><h:outputLink value="payments.xhtml?sent=true"><i class="fa fa-bar-chart-o"></i> #{i18n['sent-payments']}</h:outputLink></li>
+									          	<li><h:outputLink value="settings.xhtml"><i class="fa fa-edit"></i> #{i18n['settings']}</h:outputLink></li>
 						  						<li class="divider"></li>
-									          	<li><a href="users.xhtml"><i class="fa fa-cog"></i> Users</a></li>
-									          	<li><a href="publishers.xhtml"><i class="fa fa-cog"></i> Publisher Requests</a></li>
+									          	<li><h:outputLink value="users.xhtml"><i class="fa fa-cog"></i> Users</h:outputLink></li>
+									          	<li><h:outputLink value="publishers.xhtml"><i class="fa fa-cog"></i> Publisher Requests</h:outputLink></li>
 						  						<li class="divider"></li>
 									      	  	<li> 
-										      		<a href="logout.xhtml" id="public-btn-logout" title="'sign-out'">
-										      			<i class="black fa fa-power-off fa-1x"></i> #{i18n['sign-out']}
-										      		</a>
+									      	  		<h:form>
+										      	  		<h:commandLink action="#{loginController.logout()}">
+											      			<i class="black fa fa-power-off fa-1x"></i> #{i18n['sign-out']}
+											      		</h:commandLink>
+									      	  		</h:form>
 									      		</li>          
 									        </ul>
 									      </li>	
+									      
 									    </c:if>
 									</ul>
 								</div>

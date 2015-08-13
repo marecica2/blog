@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="main.xhtml">
@@ -11,10 +10,9 @@
 	
 <div class="container embed-item">
 	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-6">
-			Welcome #{loggedUser.isLogged()}	#{loggedUser.user.firstName}	
-		</div>	
+		<div class="col-md-12 padding30">
+			Welcome #{loggedUser.isLogged()} #{loggedUser.user.firstName}	
+		</div>
 	</div>	
 </div>	
 	

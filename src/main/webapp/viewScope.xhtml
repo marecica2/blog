@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="main.xhtml">
+<ui:define name="content">
+	
+<div class="container embed-item">
+	<div class="row">
+		<div class="col-md-12 padding30">
+
+		    <h2>View Scope</h2>
+		 
+		    <h:panelGroup rendered="#{empty viewManager.cacheList}">
+		        <p>No data inserted yet.</p>
+		    </h:panelGroup>
+		    <h:panelGroup rendered="#{!viewManager.edit}">
+		        <h3>Add Data</h3>
+		        <h:form>
+		            <p>Key:
+		                <h:inputText value="#{viewManager.item.key}" />
+		            </p>
+		            <p>Value:
+		                <h:inputText value="#{viewManager.item.value}" />
+		            </p>
+		            <p>
+		                <h:commandButton value="add" action="#{viewManager.add}" />
+		            </p>
+		        </h:form>
+		    </h:panelGroup>
+		    <h:panelGroup rendered="#{viewManager.edit}">
+		        <h3>Edit item #{viewManager.item.key}</h3>
+		        <h:form>
+		            <p>Key:
+		                <h:inputText value="#{viewManager.item.key}" />
+		            </p>
+		            <p>Value:
+		                <h:inputText value="#{viewManager.item.value}" />
+		            </p>
+		            <p>
+		                <h:commandButton value="save" action="#{viewManager.save}" />
+		            </p>
+		        </h:form>
+		    </h:panelGroup>
+		    <h:form rendered="#{not empty viewManager.cacheList}">
+		        <h:dataTable value="#{viewManager.cacheList}" var="item"
+		            styleClass="table" headerClass="table-header"
+		            rowClasses="table-odd-row,table-even-row">
+		            <h:column>
+		                <f:facet name="header">Key</f:facet>
+		                <h:outputText value="#{item.key}" />
+		            </h:column>
+		            <h:column>
+		                <f:facet name="header">Value</f:facet>
+		                <h:outputText value="#{item.value}" />
+		            </h:column>
+		                <h:column>
+		                    <h:commandButton value="edit" action="#{viewManager.edit(item)}" />
+		                </h:column>
+		                <h:column>
+		                    <h:commandButton value="delete"
+		                        action="#{viewManager.delete(item)}" />
+		                </h:column>
+		          
+		        </h:dataTable>
+		 
+		    </h:form>
+
+		</div>
+	</div>	
+</div>	
+	
+</ui:define>
+</ui:composition>
+</html>
