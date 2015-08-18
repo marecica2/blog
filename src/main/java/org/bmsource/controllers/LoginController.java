@@ -9,8 +9,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 
 import org.bmsource.beans.UserEJB;
 import org.bmsource.model.User;
@@ -60,14 +58,12 @@ public class LoginController extends BaseController
             errorMessage("loginForm:password", "Incorrect password");
         if (user != null && user.getPassword().equals(password))
         {
-            userController.setUser(user);
-            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-            HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
             try
             {
-                request.login(login, password);
+                userController.setUser(user);
+                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
                 externalContext.redirect(originalURL);
-            } catch (ServletException | IOException e)
+            } catch (IOException e)
             {
                 e.printStackTrace();
             }

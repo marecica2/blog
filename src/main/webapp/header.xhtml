@@ -56,16 +56,35 @@
 							<a class="btn dropdown-toggle margin-top-clear" href="/faq.xhtml">#{i18n['faq']}</a>
 							<a class="btn dropdown-toggle margin-top-clear" href="/contact.xhtml">#{i18n['contact-us']}</a>
 						</div>
+						
+						<h:form style="display:inline">
 						<div class="btn-group dropdown">
+							
 							<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-								<img src='resources/images/flags/en.gif'></img>
+								<img src='resources/images/flags/#{localeController.locale}.gif'></img>
 							</button>
+							
+							<ul class="dropdown-menu dropdown-menu-right dropdown-animation" style="padding:0px;">
+								<li><h:commandLink action="#{localeController.setLanguage('en')}"><img class="inline" src='resources/images/flags/en.gif'></img> English</h:commandLink></li>
+								<li><h:commandLink action="#{localeController.setLanguage('sk')}"><img class="inline" src='resources/images/flags/sk.gif'></img> Slovensky</h:commandLink></li>
+							</ul>
+							
+							<!-- 
+							<h:form>
+							    <h:selectOneMenu value="#{localeController.language}" onchange="submit()">
+							        <f:selectItem itemValue="en" itemLabel="English" />
+							        <f:selectItem itemValue="sk" itemLabel="Slovensky" />
+							    </h:selectOneMenu>
+							</h:form>
+							
 							<ul class="dropdown-menu dropdown-menu-right dropdown-animation" style="padding:0px;">
 					            <li><a href="/locale?locale=en-url=request.url.urlEncode" ><img class="inline" src='resources/images/flags/en.gif'></img> English</a></li>
 					            <li><a href="/locale?locale=de-url=request.url.urlEncode" ><img class="inline" src='resources/images/flags/de.gif'></img> Deutsch</a></li>
 					            <li><a href="/locale?locale=sk-url=request.url.urlEncode" ><img class="inline" src='resources/images/flags/sk.gif'></img> Slovensky</a></li>
 							</ul>							
+							 -->
 						</div>
+						</h:form>
 						
 					</div>
 					<!--  header top dropdowns end -->

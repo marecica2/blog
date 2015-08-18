@@ -11,9 +11,36 @@
 <div class="container embed-item">
 	<div class="row">
 		<div class="col-md-12 padding30">
-
 		    <h2>View Scope</h2>
-		 
+		 	
+		 	<h:form>
+			 	<h:selectBooleanCheckbox id="item1" value="#{viewManager.item1}" label="checkbox item1" ></h:selectBooleanCheckbox>
+			 	<h:outputLabel for="item1">Remember Me</h:outputLabel> 
+			 	<br/>
+				<h:selectOneRadio value="#{viewManager.item2}">
+					<f:selectItem itemValue="High School" itemLabel="High School"/>
+					<f:selectItem itemValue="Bachelor's" itemLabel="Bachelor's"/>
+					<f:selectItem itemValue="Master's" itemLabel="Master's"/>
+					<f:selectItem itemValue="Doctorate" itemLabel="Doctorate"/>
+				</h:selectOneRadio>			 	
+
+			 	<br/>
+			 	<h:inputText value="#{viewManager.item3}" id="item3">
+			 		<f:convertNumber></f:convertNumber>
+			 	</h:inputText>
+			 	<br/>
+			 	<h:message for="item3" errorClass="error" warnClass="error"></h:message>
+
+			 	<br/>
+				<h:inputText id="date" label="Input date" value="#{viewManager.date}" required="true">
+					<f:convertDateTime pattern="MM/yyyy"/>
+				</h:inputText>			 	
+			 	<h:message for="date" errorClass="error" warnClass="error"></h:message>
+
+			 	<br/>
+		 		<h:commandButton label="Send" class="btn btn-default" value="Send"></h:commandButton>
+		 	</h:form>
+		 	
 		    <h:panelGroup rendered="#{empty viewManager.cacheList}">
 		        <p>No data inserted yet.</p>
 		    </h:panelGroup>
@@ -64,11 +91,8 @@
 		                    <h:commandButton value="delete"
 		                        action="#{viewManager.delete(item)}" />
 		                </h:column>
-		          
 		        </h:dataTable>
-		 
 		    </h:form>
-
 		</div>
 	</div>	
 </div>	
