@@ -1,8 +1,12 @@
 package org.bmsource.controllers;
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIViewRoot;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 public class BaseController
 {
@@ -18,6 +22,19 @@ public class BaseController
         //            e.printStackTrace();
         //        }
 
+    }
+
+    public void postRedirect()
+    {
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        String page = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURI();
+        try
+        {
+            context.redirect(page);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String refresh()

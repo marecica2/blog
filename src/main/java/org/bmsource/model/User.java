@@ -1,9 +1,13 @@
 package org.bmsource.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -14,6 +18,10 @@ public class User
     @Id
     @GeneratedValue
     private Long id;
+
+    @ManyToMany
+    @JoinTable(name = "userGroup")
+    Set<Group> groups;
 
     @NotNull(message = "{validation.required}")
     @Column(nullable = false)

@@ -207,15 +207,16 @@
 									        	<img class="img-circle inline" style="position:relative;bottom:2px;height:24px;" src="/user.avatarUrl_64x64"></img>
 									        </a>
 									        <ul class="dropdown-menu">
-												<li><h:outputLink value="xxx.xhtml"><i style="color:#5cb85c" class="fa fa-circle"></i> #{i18n['uncheck-me-as-available']}</h:outputLink></li>
-									          	<li><h:outputLink value="user.xhtml"><i class="icon-user"></i> #{i18n['profile']}</h:outputLink></li>
-									          	<li><h:outputLink value="contacts.xhtml"><i class="icon-users"></i> #{i18n['contacts']}</h:outputLink></li>
-									          	<li><h:outputLink value="payments.xhtml"><i class="fa fa-bar-chart-o"></i> #{i18n['received-payments']}</h:outputLink></li>
-									          	<li><h:outputLink value="payments.xhtml?sent=true"><i class="fa fa-bar-chart-o"></i> #{i18n['sent-payments']}</h:outputLink></li>
-									          	<li><h:outputLink value="settings.xhtml"><i class="fa fa-edit"></i> #{i18n['settings']}</h:outputLink></li>
+												<li><h:outputLink value="#{request.contextPath}/xxx.xhtml"><i style="color:#5cb85c" class="fa fa-circle"></i> #{i18n['uncheck-me-as-available']}</h:outputLink></li>
+									          	<li><h:outputLink value="#{request.contextPath}/user.xhtml"><i class="icon-user"></i> #{i18n['profile']}</h:outputLink></li>
+									          	<li><h:outputLink value="#{request.contextPath}/contacts.xhtml"><i class="icon-users"></i> #{i18n['contacts']}</h:outputLink></li>
+									          	<li><h:outputLink value="#{request.contextPath}/payments.xhtml"><i class="fa fa-bar-chart-o"></i> #{i18n['received-payments']}</h:outputLink></li>
+									          	<li><h:outputLink value="#{request.contextPath}/payments.xhtml?sent=true"><i class="fa fa-bar-chart-o"></i> #{i18n['sent-payments']}</h:outputLink></li>
+									          	<li><h:outputLink value="#{request.contextPath}/settings.xhtml"><i class="fa fa-edit"></i> #{i18n['settings']}</h:outputLink></li>
 						  						<li class="divider"></li>
-									          	<li><h:outputLink value="users.xhtml"><i class="fa fa-cog"></i> Users</h:outputLink></li>
-									          	<li><h:outputLink value="publishers.xhtml"><i class="fa fa-cog"></i> Publisher Requests</h:outputLink></li>
+									          	<li><h:outputLink value="#{request.contextPath}/users.xhtml"><i class="fa fa-cog"></i> Users</h:outputLink></li>
+									          	<li><h:outputLink value="#{request.contextPath}/publishers.xhtml"><i class="fa fa-cog"></i> Publisher Requests</h:outputLink></li>
+									          	<li><h:outputLink value="#{request.contextPath}/groups.xhtml"><i class="icon-users"></i> Manage groups</h:outputLink></li>
 						  						<li class="divider"></li>
 									      	  	<li> 
 									      	  		<h:form>

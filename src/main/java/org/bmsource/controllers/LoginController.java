@@ -37,7 +37,7 @@ public class LoginController extends BaseController
 
         if (originalURL == null)
         {
-            originalURL = externalContext.getRequestContextPath() + "index.xhtml";
+            originalURL = externalContext.getRequestContextPath() + "/index.xhtml";
         } else
         {
             String originalQuery = (String) externalContext.getRequestMap().get(RequestDispatcher.FORWARD_QUERY_STRING);

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="main.xhtml">
+<ui:define name="content">
+	
+<div class="container embed-item">
+	<div class="row">
+		<div class="col-md-12 padding30">
+		    <h2>Manage groups</h2>
+		 	
+		    <h:panelGroup rendered="#{!groupController.edit}">
+		        <h:form>
+					<div class="form-group">
+			            <h:inputText id="name" value="#{groupController.group.name}" a:placeholder="#{i18n['Group name']}" class="form-control" />
+						<h:message for="name" errorClass="error"/>
+					</div>	
+							        
+					<div class="form-group">
+		                <h:commandButton value="add" styleClass="btn btn-default" action="#{groupController.add}" />
+					</div>	
+		        </h:form>
+		    </h:panelGroup>
+		   
+		    <h:panelGroup rendered="#{groupController.edit}">
+		        <h3>Edit group #{groupController.group.name}</h3>
+		        <h:form>
+		            <p>Name:
+		                <h:inputText value="#{groupController.group.name}" />
+		            </p>
+		            <p>
+		                <h:commandButton value="save" action="#{groupController.save}" />
+		            </p>
+		        </h:form>
+		    </h:panelGroup>
+		    
+		    <h:panelGroup rendered="#{empty groupController.groups}">
+		        <p>No data inserted yet.</p>
+		    </h:panelGroup>		    
+		    
+		    <h:form rendered="#{not empty groupController.groups}">
+		        <h:dataTable value="#{groupController.groups}" var="group" styleClass="table" headerClass="table-header" rowClasses="table-odd-row,table-even-row">
+		            <h:column>
+		                <f:facet name="header">Key</f:facet>
+		                <h:outputText value="#{group.name}" />
+		            </h:column>
+	                <h:column>
+	                    <h:commandButton value="edit" action="#{groupController.edit(group)}" />
+	                </h:column>
+	                <h:column>
+	                    <h:commandButton value="delete" action="#{groupController.delete(group.id)}" />
+	                </h:column>
+		        </h:dataTable>
+		    </h:form>
+		</div>
+	</div>	
+</div>	
+	
+</ui:define>
+</ui:composition>
+</html>
