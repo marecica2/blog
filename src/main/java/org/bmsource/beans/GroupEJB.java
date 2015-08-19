@@ -17,47 +17,41 @@ import org.bmsource.model.Group;
 @Named
 @Stateless
 @LocalBean
-public class GroupEJB implements Serializable
-{
-    @Inject
-    private EntityManager em;
+public class GroupEJB implements Serializable {
 
-    public List<Group> findGroups()
-    {
-        System.err.println("executing findGroups");
-        TypedQuery<Group> query = em.createQuery("SELECT g FROM Group g", Group.class);
-        return query.getResultList();
-    }
+	private static final long serialVersionUID = -1193177975841547046L;
 
-    public @NotNull Group createGroup(@NotNull Group group)
-    {
-        em.persist(group);
-        return group;
-    }
+	@Inject
+	private EntityManager em;
 
-    public @NotNull Group updateGroup(@NotNull Group group)
-    {
-        return em.merge(group);
-    }
+	public List<Group> findGroups() {
+		TypedQuery<Group> query = em.createQuery("SELECT g FROM Group g", Group.class);
+		return query.getResultList();
+	}
 
-    public void deleteGroup(@NotNull Group group)
-    {
-        em.remove(em.merge(group));
-    }
+	public @NotNull Group createGroup(@NotNull Group group) {
+		em.persist(group);
+		return group;
+	}
 
-    public Group findGroupById(@NotNull Long id)
-    {
-        return em.find(Group.class, id);
-    }
+	public @NotNull Group updateGroup(@NotNull Group group) {
+		return em.merge(group);
+	}
 
-    public Group findGroupByName(String name)
-    {
-        try
-        {
-            return em.createQuery("from Group g where g.name = :name", Group.class).setParameter("name", name).getSingleResult();
-        } catch (NoResultException ex)
-        {
-            return null;
-        }
-    }
+	public void deleteGroup(@NotNull Group group) {
+		em.remove(em.merge(group));
+	}
+
+	public Group findGroupById(@NotNull Long id) {
+		return em.find(Group.class, id);
+	}
+
+	public Group findGroupByName(String name) {
+		try {
+			return em.createQuery("from Group g where g.name = :name", Group.class).setParameter("name", name)
+					.getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
+		}
+	}
 }

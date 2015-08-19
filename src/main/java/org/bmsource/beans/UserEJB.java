@@ -17,46 +17,47 @@ import org.bmsource.model.User;
 @Named
 @Stateless
 @LocalBean
-public class UserEJB implements Serializable
-{
-    @Inject
-    private EntityManager em;
+public class UserEJB implements Serializable {
 
-    public List<User> findUsers()
-    {
-        TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
-        return query.getResultList();
-    }
+	private static final long serialVersionUID = 7389005918246289966L;
 
-    public @NotNull User createUser(@NotNull User User)
-    {
-        em.persist(User);
-        return User;
-    }
+	@Inject
+	private EntityManager em;
 
-    public @NotNull User updateUser(@NotNull User User)
-    {
-        return em.merge(User);
-    }
+	public List<User> findUsers(Boolean prefetch) {
+		if (prefetch) {
+			TypedQuery<User> query = em.createQuery("SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.groups g",
+					User.class);
+			List<User> u = query.getResultList();
+			return u;
+		}
+		TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
+		return query.getResultList();
+	}
 
-    public void deleteUser(@NotNull User User)
-    {
-        em.remove(em.merge(User));
-    }
+	public @NotNull User createUser(@NotNull User User) {
+		em.persist(User);
+		return User;
+	}
 
-    public User findUserById(@NotNull Long id)
-    {
-        return em.find(User.class, id);
-    }
+	public @NotNull User updateUser(@NotNull User User) {
+		return em.merge(User);
+	}
 
-    public User findUserByLogin(String login)
-    {
-        try
-        {
-            return em.createQuery("from User u where u.login = :login", User.class).setParameter("login", login).getSingleResult();
-        } catch (NoResultException ex)
-        {
-            return null;
-        }
-    }
+	public void deleteUser(@NotNull User User) {
+		em.remove(em.merge(User));
+	}
+
+	public User findUserById(@NotNull Long id) {
+		return em.find(User.class, id);
+	}
+
+	public User findUserByLogin(String login) {
+		try {
+			return em.createQuery("from User u where u.login = :login", User.class).setParameter("login", login)
+					.getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
+		}
+	}
 }

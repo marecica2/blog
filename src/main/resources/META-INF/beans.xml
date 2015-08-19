@@ -4,4 +4,7 @@
   <alternatives>
     <class>org.bmsource.generator.MockGenerator</class>
   </alternatives>
+  <interceptors>
+   <class>org.bmsource.interceptor.AuthentifyInterceptor</class>
+</interceptors>
 </beans>

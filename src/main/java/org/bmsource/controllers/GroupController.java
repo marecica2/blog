@@ -8,74 +8,107 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bmsource.beans.GroupEJB;
+import org.bmsource.beans.UserEJB;
+import org.bmsource.interceptor.Authentify;
 import org.bmsource.model.Group;
+import org.bmsource.model.User;
 
+@Authentify
 @Named
 @javax.faces.view.ViewScoped
-public class GroupController extends BaseController implements Serializable
-{
-    @Inject
-    GroupEJB groupEJB;
+public class GroupController extends BaseController implements Serializable {
 
-    List<Group> groups;
-    private Group group = new Group();
-    private boolean edit;
+	private static final long serialVersionUID = 73918487008364154L;
 
-    @PostConstruct
-    public void init()
-    {
-        groups = groupEJB.findGroups();
-    }
+	@Inject
+	private GroupEJB groupEJB;
 
-    public List<Group> getGroups()
-    {
-        return groups;
-    }
+	@Inject
+	private UserEJB userEJB;
 
-    public Group getGroup()
-    {
-        return group;
-    }
+	private List<Group> groups;
 
-    public void setGroup(Group group)
-    {
-        this.group = group;
-    }
+	private List<User> users;
 
-    public void setEdit(boolean edit)
-    {
-        this.edit = edit;
-    }
+	private Group group = new Group();
 
-    public void add()
-    {
-        groupEJB.createGroup(group);
-        postRedirect();
-    }
+	private boolean edit;
 
-    public void edit(Group group)
-    {
-        this.group = group;
-        edit = true;
-    }
+	@PostConstruct
+	public void init() {
+		users = userEJB.findUsers(true);
+		System.err.println(users);
+		groups = groupEJB.findGroups();
+	}
 
-    public void save()
-    {
-        groupEJB.updateGroup(group);
-        edit = false;
-        group = new Group();
-        postRedirect();
-    }
+	public List<User> getUsers() {
+		return users;
+	}
 
-    public void delete(Long id)
-    {
-        Group g = groupEJB.findGroupById(id);
-        groupEJB.deleteGroup(g);
-        postRedirect();
-    }
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 
-    public boolean isEdit()
-    {
-        return edit;
-    }
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
+	public void setEdit(boolean edit) {
+		this.edit = edit;
+	}
+
+	public void add() {
+		groupEJB.createGroup(group);
+		postRedirect();
+	}
+
+	public void edit(Group group) {
+		this.group = group;
+		System.err.println(group);
+		edit = true;
+	}
+
+	public void save() {
+		groupEJB.updateGroup(group);
+		edit = false;
+		group = new Group();
+		postRedirect();
+	}
+
+	public void delete(Long id) {
+		Group g = groupEJB.findGroupById(id);
+		groupEJB.deleteGroup(g);
+		postRedirect();
+	}
+
+	public boolean isEdit() {
+		return edit;
+	}
+
+	public void addToGroup(User user) {
+		group.getUsers().add(user);
+		groupEJB.updateGroup(group);
+		user.getGroups().add(group);
+		userEJB.updateUser(user);
+	}
+
+	public void removeFromGroup(User user) {
+		user.getGroups().remove(group);
+		userEJB.updateUser(user);
+		group.getUsers().remove(user);
+		groupEJB.updateGroup(group);
+	}
+
+	public void removeUser(User user) {
+		userEJB.deleteUser(user);
+	}
+
 }
