@@ -27,7 +27,6 @@ public class UserController extends BaseController implements Serializable
         FacesContext fCtx = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(false);
         String sessionId = session.getId();
-        System.err.println(sessionId);
         return user;
     }
 

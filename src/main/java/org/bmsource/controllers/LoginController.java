@@ -9,9 +9,12 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.bmsource.beans.UserEJB;
 import org.bmsource.model.User;
+import org.bmsource.model.Utils;
 
 @Named
 @RequestScoped
@@ -49,27 +52,35 @@ public class LoginController extends BaseController
         }
     }
 
-    public String login()
+    public void login()
     {
         User user = userEJB.findUserByLogin(login);
         if (user == null)
             errorMessage("loginForm:login", "User does not exist");
-        if (user != null && !user.getPassword().equals(password))
-            errorMessage("loginForm:password", "Incorrect password");
-        if (user != null && user.getPassword().equals(password))
+        else
         {
-            try
+            password = Utils.encodeSHA256(password);
+            System.err.println(user.getPassword());
+            System.err.println(password);
+            if (!user.getPassword().equals(password))
+                errorMessage("loginForm:password", "Incorrect password");
+            else
             {
-                userController.setUser(user);
-                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-                externalContext.redirect(originalURL);
-            } catch (IOException e)
-            {
-                e.printStackTrace();
+                try
+                {
+                    userController.setUser(user);
+                    ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+                    externalContext.redirect(originalURL);
+                    HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+                    System.err.println(login + " : " + password);
+                    request.login(login, password);
+                } catch (ServletException | IOException e)
+                {
+                    e.printStackTrace();
+                }
+                redirect("/index.xhtml");
             }
-            return redirect("/index.xhtml");
         }
-        return "login.xhtml";
     }
 
     public String logout()
