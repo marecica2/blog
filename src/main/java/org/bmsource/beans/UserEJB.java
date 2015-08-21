@@ -26,13 +26,13 @@ public class UserEJB implements Serializable {
 
 	public List<User> findUsers(Boolean prefetch) {
 		if (prefetch) {
-			TypedQuery<User> query = em.createQuery("SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.groups g",
-					User.class);
+			TypedQuery<User> query = em.createQuery("SELECT u FROM User u LEFT JOIN FETCH u.groups g", User.class);
 			List<User> u = query.getResultList();
 			return u;
+		} else {
+			TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
+			return query.getResultList();
 		}
-		TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
-		return query.getResultList();
 	}
 
 	public @NotNull User createUser(@NotNull User User) {
