@@ -13,68 +13,19 @@
 	<div class="row">
 		<div class="col-md-12 padding30">
 		    <h2>Manage groups</h2>
-		 	
-		    <h:panelGroup rendered="#{groupController.edit}">
-		        <h3>Edit group #{groupController.group.name}</h3>
-		        
-		        <h:form>
-					<div class="form-group">
-		                <h:inputText value="#{groupController.group.name}" a:placeholder="#{i18n['Group name']}" class="form-control" />
-					</div>			            
-					<div class="form-group">
-		                <h:commandButton value="save" styleClass="btn btn-default" action="#{groupController.save}" />
-					</div>			            
-		        </h:form>
-		        
-			    <h:form>
-			        <h:dataTable value="#{groupController.users}" var="usr" styleClass="table table-striped table-condensed table-hover">
-			            <h:column>
-			                <f:facet name="header">User to add</f:facet>
-			                <h:outputText value="#{usr.login}" />
-			            </h:column>
-		                <h:column>
-		                    <h:commandButton value="add to group" action="#{groupController.addToGroup(usr)}" />
-		                </h:column>
-		                <h:column>
-		                    <h:commandButton value="delete" action="#{groupController.removeUser(usr)}" />
-		                </h:column>
-			        </h:dataTable>
-			    </h:form>		        
-		        
-			    <h:form>
-			        <h:dataTable value="#{groupController.group.users}" var="usr" styleClass="table table-striped table-condensed table-hover">
-			            <h:column>
-			                <f:facet name="header">User in group</f:facet>
-			                <h:outputText value="#{usr.login}" />
-			            </h:column>
-		                <h:column>
-		                    <h:commandButton  action="#{groupController.removeFromGroup(usr)}" value="remove" styleClass="btn btn-sm btn-light-gray margin-clear"></h:commandButton>
-		                </h:column>
-			        </h:dataTable>
-			    </h:form>				        
-		    </h:panelGroup>
 		    
-		    <h:panelGroup rendered="#{!groupController.edit}">
-		        <h:form>
-					<div class="form-group">
-			            <h:inputText id="name" value="#{groupController.group.name}" a:placeholder="#{i18n['Group name']}" class="form-control" />
-						<h:message for="name" errorClass="error"/>
-					</div>	
-							        
-					<div class="form-group">
-		                <h:commandButton value="add" styleClass="btn btn-default" action="#{groupController.add}" />
-					</div>	
-		        </h:form>
-		    </h:panelGroup>		    
-		    
-		    <h:form rendered="#{not empty groupController.groups}">
+		    <!-- display groups -->
+		    <h:form>
 		        <h:dataTable value="#{groupController.groups}" var="group" styleClass="table table-striped table-condensed table-hover">
 		            <h:column>
 		                <f:facet name="header">Name</f:facet>
 		                <h:outputText value="#{group.name}" />
 		            </h:column>
 	                <h:column>
-	                    <h:commandButton value="edit" action="#{groupController.edit(group)}" />
+	                    <h:link value="edit" outcome="groups.xhtml">
+	                    	<f:param name="group" value="#{group.id}"></f:param>
+	                    	<f:param name="edit" value="true"></f:param>
+	                    </h:link>
 	                </h:column>
 	                <h:column>
 	                    <h:commandButton value="delete" action="#{groupController.delete(group.id)}" />
@@ -82,9 +33,75 @@
 		        </h:dataTable>
 		    </h:form>
 		    
-		    <h:panelGroup rendered="#{empty groupController.groups}">
-		        <p>No data inserted yet.</p>
-		    </h:panelGroup>		
+		    		    
+		 	<br/>
+		    <h:panelGroup rendered="#{param['edit']}">
+		        <h3>Edit group #{groupController.group.name}</h3>
+		        
+		        <!-- edit group -->
+		        <h:form>
+					<div class="form-group">
+		                <h:inputText value="#{groupController.group.name}" a:placeholder="#{i18n['Group name']}" class="form-control" />
+					</div>			            
+					<div class="form-group">
+			            <h:commandButton value="save" styleClass="btn btn-default" action="#{groupController.save()}">
+			            	<f:param name="group" value="#{param['group']}"></f:param>
+			            	<f:param name="edit" value="true"></f:param>
+			            </h:commandButton>
+					</div>			            
+		        </h:form>
+		        
+		        <!-- add users to group -->
+			    <h:form>
+			        <h:dataTable value="#{groupController.users}" var="usr" styleClass="table table-striped table-condensed table-hover">
+			            <h:column>
+			                <f:facet name="header">User to add</f:facet>
+			                <h:outputText value="#{usr.login}" />
+			            </h:column>
+		                <h:column>
+		                    <h:commandButton value="add to group" action="#{groupController.addToGroup()}">
+				            	<f:param name="group" value="#{param['group']}"></f:param>
+				            	<f:param name="user" value="#{usr.id}"></f:param>
+				            	<f:param name="edit" value="true"></f:param>
+		                    </h:commandButton>
+		                </h:column>
+		                <h:column>
+		                    <h:commandButton value="delete" action="#{groupController.removeUser(usr)}" />
+		                </h:column>
+			        </h:dataTable>
+			        
+			        <h:dataTable value="#{groupController.group.users}" var="usr" styleClass="table table-striped table-condensed table-hover">
+			            <h:column>
+			                <f:facet name="header">User in group</f:facet>
+			                <h:outputText value="#{usr.login}" />
+			            </h:column>
+		                <h:column>
+		                    <h:commandButton  action="#{groupController.removeFromGroup()}" value="remove">
+				            	<f:param name="group" value="#{param['group']}"></f:param>
+				            	<f:param name="user" value="#{usr.id}"></f:param>
+				            	<f:param name="edit" value="true"></f:param>
+		                    </h:commandButton>
+		                </h:column>
+			        </h:dataTable>
+			    </h:form>				        
+		    </h:panelGroup>
+		    
+		    
+		    
+		    <!-- create new group -->
+		    <h:panelGroup rendered="#{empty param['edit']}">
+		        <h:form>
+					<div class="form-group">
+			            <h:inputText id="name" value="#{groupController.group.name}" a:placeholder="#{i18n['group-name']}" class="form-control" />
+						<h:message for="name" errorClass="error"/>
+					</div>	
+							        
+					<div class="form-group">
+			                <h:commandButton value="add" styleClass="btn btn-default" action="#{groupController.add()}" />
+					</div>	
+		        </h:form>
+		    </h:panelGroup>		    
+		    
 		    		    
 		</div>
 	</div>	

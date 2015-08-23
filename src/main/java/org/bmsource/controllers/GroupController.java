@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -14,30 +14,76 @@ import org.bmsource.model.Group;
 import org.bmsource.model.User;
 
 @Named
-@ViewScoped
+@RequestScoped
 public class GroupController extends BaseController implements Serializable {
 
 	private static final long serialVersionUID = 73918487008364154L;
-
 	@Inject
 	private GroupEJB groupEJB;
-
 	@Inject
 	private UserEJB userEJB;
 
 	private List<Group> groups;
-
 	private List<User> users;
-
 	private Group group = new Group();
-
 	private boolean edit;
 
 	@PostConstruct
 	public void init() {
-		users = userEJB.findUsers(true);
+		System.err.println("init");
 		groups = groupEJB.findGroups();
+		edit = params.get("edit") != null ? true : false;
+		if (edit) {
+			group = params.get("group") != null ? groupEJB.findGroupById(Long.parseLong(params.get("group"))) : null;
+			users = userEJB.findUsers(true);
+		}
 	}
+
+	public void add() {
+		groupEJB.createGroup(group);
+		postRedirect();
+	}
+
+	public String save() {
+		Group toUpdate = groupEJB.findGroupById(Long.parseLong(params.get("group")));
+		toUpdate.setName(group.getName());
+		groupEJB.updateGroup(toUpdate);
+		return redirect("groups.xhtml");
+	}
+
+	public void delete(Long id) {
+		Group g = groupEJB.findGroupById(id);
+		groupEJB.deleteGroup(g);
+		postRedirect();
+	}
+
+	public void addToGroup() {
+		User user = userEJB.findUserById(Long.parseLong(params.get("user")));
+		Group group = groupEJB.findGroupById(Long.parseLong(params.get("group")));
+		group.getUsers().add(user);
+		groupEJB.updateGroup(group);
+		this.group = group;
+		refresh();
+	}
+
+	public void removeFromGroup() {
+		User user = userEJB.findUserById(Long.parseLong(params.get("user")));
+		Group group = groupEJB.findGroupById(Long.parseLong(params.get("group")));
+		user.getGroups().remove(group);
+		userEJB.updateUser(user);
+		group.getUsers().remove(user);
+		this.group = group;
+		refresh();
+	}
+
+	public void removeUser(User user) {
+		System.err.println("remove user");
+		userEJB.deleteUser(user);
+	}
+
+	//
+	// getters
+	//
 
 	public List<User> getUsers() {
 		return users;
@@ -63,49 +109,7 @@ public class GroupController extends BaseController implements Serializable {
 		this.edit = edit;
 	}
 
-	public void add() {
-		groupEJB.createGroup(group);
-		postRedirect();
-	}
-
-	public void edit(Group group) {
-		this.group = group;
-		edit = true;
-	}
-
-	public void save() {
-		groupEJB.updateGroup(group);
-		edit = false;
-		group = new Group();
-		postRedirect();
-	}
-
-	public void delete(Long id) {
-		Group g = groupEJB.findGroupById(id);
-		groupEJB.deleteGroup(g);
-		postRedirect();
-	}
-
 	public boolean isEdit() {
 		return edit;
 	}
-
-	public void addToGroup(User user) {
-		group.getUsers().add(user);
-		groupEJB.updateGroup(group);
-		user.getGroups().add(group);
-		userEJB.updateUser(user);
-	}
-
-	public void removeFromGroup(User user) {
-		user.getGroups().remove(group);
-		userEJB.updateUser(user);
-		group.getUsers().remove(user);
-		groupEJB.updateGroup(group);
-	}
-
-	public void removeUser(User user) {
-		userEJB.deleteUser(user);
-	}
-
 }
