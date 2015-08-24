@@ -17,18 +17,22 @@
   </persistence-unit>
   
   
-  <persistence-unit name="JEE6Demo-Persistence"
-      transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="JEE6Demo-Persistence" transaction-type="RESOURCE_LOCAL">
       <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
       <exclude-unlisted-classes>false</exclude-unlisted-classes>
       <properties>
-          <property name="eclipselink.logging.level" value="FINE" />
-        <property name="eclipselink.target-database" value="DERBY" />
+          <property name="eclipselink.target-database" value="DERBY" />
           <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
           <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:StudentsDB;create=true" />
           <property name="javax.persistence.jdbc.user" value="" />
           <property name="javax.persistence.jdbc.password" value="" />
-          <property name="eclipselink.logging.level" value="INFO" />
+          
+          <property name="javax.persistence.schema-generation-target" value="database"/>      
+	      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+	      <property name="javax.persistence.schema-generation.create-database-schemas" value="true"/> 
+	      <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/> 
+		  <property name="eclipselink.logging.level.sql" value="FINE"/>
+		  <property name="eclipselink.logging.parameters" value="true"/>      
       </properties>
   </persistence-unit>
   

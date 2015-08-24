@@ -112,4 +112,20 @@ public class GroupController extends BaseController implements Serializable {
 	public boolean isEdit() {
 		return edit;
 	}
+
+	public GroupEJB getGroupEJB() {
+		return groupEJB;
+	}
+
+	public void setGroupEJB(GroupEJB groupEJB) {
+		this.groupEJB = groupEJB;
+	}
+
+	public UserEJB getUserEJB() {
+		return userEJB;
+	}
+
+	public void setUserEJB(UserEJB userEJB) {
+		this.userEJB = userEJB;
+	}
 }

@@ -35,9 +35,9 @@ public class UserEJB implements Serializable {
 		}
 	}
 
-	public @NotNull User createUser(@NotNull User User) {
-		em.persist(User);
-		return User;
+	public @NotNull User createUser(@NotNull User user) {
+		em.persist(user);
+		return user;
 	}
 
 	public @NotNull User updateUser(@NotNull User User) {
@@ -59,5 +59,13 @@ public class UserEJB implements Serializable {
 		} catch (NoResultException ex) {
 			return null;
 		}
+	}
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
 }

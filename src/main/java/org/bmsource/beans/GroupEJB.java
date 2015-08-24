@@ -54,4 +54,13 @@ public class GroupEJB implements Serializable {
 			return null;
 		}
 	}
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
 }

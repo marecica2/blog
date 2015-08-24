@@ -1,5 +1,6 @@
 package org.bmsource.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -18,8 +19,8 @@ public class Group {
 
 	private String name;
 
-	@ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
-	private Set<User> users;
+	@ManyToMany(mappedBy = "groups", fetch = FetchType.LAZY)
+	private Set<User> users = new HashSet<>();
 
 	public Set<User> getUsers() {
 		return users;
@@ -47,7 +48,9 @@ public class Group {
 
 	@Override
 	public String toString() {
-		return "Group [name=" + name + "]";
+		StringBuilder us = new StringBuilder();
+		this.users.stream().forEach(item -> us.append(item.getLogin() + ","));
+		return "Group [name=" + name + ", users = " + us + "]";
 	}
 
 	@Override
