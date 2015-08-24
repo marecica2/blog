@@ -4,24 +4,25 @@ import java.io.StringWriter;
 import java.util.Date;
 import java.util.List;
 
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.ws.WebServiceRef;
 
 import org.bmsource.beans.BookEJBRemote;
+import org.bmsource.beans.BookService;
 import org.bmsource.model.Book;
+import org.bmsource.model.Customer;
 import org.bmsource.ws.client.CardValidatorService;
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
 
 public class Main
 {
@@ -49,27 +50,27 @@ public class Main
         System.out.println(cardValidatorService.getCardValidatorPort().validate(creditCard));
     }
 
-    private static void jms() throws Exception
-    {
-        try
-        {
-            Context jndiContext = new InitialContext();
-            ConnectionFactory connectionFactory = (ConnectionFactory) jndiContext.lookup("jms/javaee7/ConnectionFactory");
-            Destination queue = (Destination) jndiContext.lookup("jms/javaee7/Queue");
-
-            Connection connection = connectionFactory.createConnection();
-            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            MessageProducer producer = session.createProducer(queue);
-
-            // Sends a text message to the queue
-            TextMessage message = session.createTextMessage("Text message sent at " + new Date());
-            producer.send(message);
-            connection.close();
-        } catch (NamingException | JMSException e)
-        {
-            e.printStackTrace();
-        }
-    }
+    //    private static void jms() throws Exception
+    //    {
+    //        try
+    //        {
+    //            Context jndiContext = new InitialContext();
+    //            ConnectionFactory connectionFactory = (ConnectionFactory) jndiContext.lookup("jms/javaee7/ConnectionFactory");
+    //            Destination queue = (Destination) jndiContext.lookup("jms/javaee7/Queue");
+    //
+    //            Connection connection = connectionFactory.createConnection();
+    //            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+    //            MessageProducer producer = session.createProducer(queue);
+    //
+    //            // Sends a text message to the queue
+    //            TextMessage message = session.createTextMessage("Text message sent at " + new Date());
+    //            producer.send(message);
+    //            connection.close();
+    //        } catch (NamingException | JMSException e)
+    //        {
+    //            e.printStackTrace();
+    //        }
+    //    }
 
     private static void jaxb() throws NamingException, JAXBException
     {
@@ -107,28 +108,28 @@ public class Main
         System.out.println("Book deleted");
     }
 
-    //    private static void embeddedTest()
-    //    {
-    //        Weld weld = new Weld();
-    //        WeldContainer container = weld.initialize();
-    //        BookService bookService = container.instance().select(BookService.class).get();
-    //        Book book = bookService.createBook("H2G2", 12.5f, "Geeky scifi Book");
-    //        System.out.println(book);
-    //
-    //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("postgres");
-    //        EntityManager em = emf.createEntityManager();
-    //
-    //        Customer c = new Customer();
-    //        c.setFirstName("Marek");
-    //        c.setLastName("Balla");
-    //        c.setDateOfBirth(new Date(System.currentTimeMillis() - 2000000));
-    //        c.setEmail("marecica2@gmail.com");
-    //
-    //        EntityTransaction tx = em.getTransaction();
-    //        tx.begin();
-    //        em.persist(c);
-    //        tx.commit();
-    //
-    //        weld.shutdown();
-    //    }
+    private static void embeddedTest()
+    {
+        Weld weld = new Weld();
+        WeldContainer container = weld.initialize();
+        BookService bookService = container.instance().select(BookService.class).get();
+        Book book = bookService.createBook("H2G2", 12.5f, "Geeky scifi Book");
+        System.out.println(book);
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("postgres");
+        EntityManager em = emf.createEntityManager();
+
+        Customer c = new Customer();
+        c.setFirstName("Marek");
+        c.setLastName("Balla");
+        c.setDateOfBirth(new Date(System.currentTimeMillis() - 2000000));
+        c.setEmail("marecica2@gmail.com");
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.persist(c);
+        tx.commit();
+
+        weld.shutdown();
+    }
 }
