@@ -18,7 +18,7 @@
   
   
   <persistence-unit name="JEE6Demo-Persistence" transaction-type="RESOURCE_LOCAL">
-      <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <exclude-unlisted-classes>false</exclude-unlisted-classes>
       <properties>
           <property name="eclipselink.target-database" value="DERBY" />
@@ -30,9 +30,14 @@
           <property name="javax.persistence.schema-generation-target" value="database"/>      
 	      <property name="javax.persistence.schema-generation.database.action" value="create"/>
 	      <property name="javax.persistence.schema-generation.create-database-schemas" value="true"/> 
+	      
 	      <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/> 
 		  <property name="eclipselink.logging.level.sql" value="FINE"/>
-		  <property name="eclipselink.logging.parameters" value="true"/>      
+		  <property name="eclipselink.logging.parameters" value="true"/>
+		        
+		  <property name="hibernate.show_sql" value="true"/>      
+		  <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect"/>
+		  <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       </properties>
   </persistence-unit>
   
