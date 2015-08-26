@@ -53,6 +53,9 @@ public class GroupController extends BaseController implements Serializable {
 
 	public void delete(Long id) {
 		Group g = groupEJB.findGroupById(id);
+		System.err.println(g);
+		System.err.println(g);
+		System.err.println(g);
 		groupEJB.deleteGroup(g);
 		postRedirect();
 	}
