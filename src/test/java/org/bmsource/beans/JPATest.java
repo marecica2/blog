@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.bmsource.model.Group;
+import org.bmsource.model.GroupProperty;
 import org.bmsource.model.User;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -22,6 +23,7 @@ public class JPATest
     private final static String PERSISTENCE_UNIT_NAME = "JEE6Demo-Persistence";
     private final UserEJB userEJB = new UserEJB();
     private final GroupEJB groupEJB = new GroupEJB();
+    private final GroupPropertyEJB gpEJB = new GroupPropertyEJB();
 
     @BeforeClass
     public static void init()
@@ -45,6 +47,7 @@ public class JPATest
         em = emFactory.createEntityManager();
         userEJB.setEm(em);
         groupEJB.setEm(em);
+        gpEJB.setEm(em);
     }
 
     @After
@@ -60,9 +63,13 @@ public class JPATest
         System.err.println("testLazy");
         User u = userEJB.findUserByLogin("test@example.com");
         Group g = groupEJB.findGroupByName("admins");
-        logger.info(u.toString());
         logger.info("user " + u.getGroups());
         logger.info("group " + g.getUsers());
+
+        em.getTransaction().begin();
+        userEJB.deleteUser(u);
+        em.getTransaction().commit();
+        System.err.println("deleted groups " + groupEJB.findGroups());
     }
 
     @Test
@@ -85,6 +92,12 @@ public class JPATest
             groupEJB.createGroup(g);
             u.getGroups().add(g);
             g.getUsers().add(u);
+
+            GroupProperty gp = new GroupProperty();
+            gp.setName("property1");
+            gp.setName("value1");
+            gpEJB.save(gp);
+
             em.getTransaction().commit();
 
         } catch (Exception ex)
